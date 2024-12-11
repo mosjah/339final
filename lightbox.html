@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightbox Exam Challenge</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+</head>
+<body>
+    <h1>Lightbox Exam Challenge</h1>
+    <p>Use the <a href="https://lokeshdhakar.com/projects/lightbox2/">lightbox code from class</a> to transform the nine images below into three sets of lightboxes.</p>
+
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Recherches_pour_servir_%C3%A0_l%27histoire_naturelle_des_mammif%C3%A8res_%28Pl._50%29_%28white_background%29.jpg/150px-Recherches_pour_servir_%C3%A0_l%27histoire_naturelle_des_mammif%C3%A8res_%28Pl._50%29_%28white_background%29.jpg" width="200" alt="Animal 1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Panda_g%C3%A9ant_-_t%C3%AAte_%28Ailuropoda_melanoleuca%29_%282%29.jpg/400px-Panda_g%C3%A9ant_-_t%C3%AAte_%28Ailuropoda_melanoleuca%29_%282%29.jpg" width="200" alt="Panda 1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Lightmatter_panda.jpg/440px-Lightmatter_panda.jpg" width="200" alt="Panda 2">
+    </div>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Spectacled_bear_%281829%29.jpg/150px-Spectacled_bear_%281829%29.jpg" width="200" alt="Bear 1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Giant_Pandas_having_a_snack.jpg/440px-Giant_Pandas_having_a_snack.jpg" width="200" alt="Pandas Eating">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Giant_Panda_Eating.jpg/440px-Giant_Panda_Eating.jpg" width="200" alt="Giant Panda Eating">
+    </div>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Ursus_arctos_-_1700-1880_-_Print_-_Iconographia_Zoologica_-_Special_Collections_University_of_Amsterdam_-_%28white_background%29.jpg/150px-Ursus_arctos_-_1700-1880_-_Print_-_Iconographia_Zoologica_-_Special_Collections_University_of_Amsterdam_-_%28white_background%29.jpg" width="200" alt="Bear 2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Panda_Cub_from_Wolong%2C_Sichuan%2C_China.JPG/440px-Panda_Cub_from_Wolong%2C_Sichuan%2C_China.JPG" width="200" alt="Panda Cub">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Qinling_panda.jpg/440px-Qinling_panda.jpg" width="200" alt="Qinling Panda">
+    </div>
+
+    <script>
+        // Lightbox2 configuration
+        lightbox.option({
+            'imageFadeDuration': 1000
+        });
+
+        // Group images into sets dynamically
+        const images = document.querySelectorAll('img');
+        const groups = [[], [], []];
+
+        // Distribute images into groups based on position
+        images.forEach((img, index) => {
+            const groupIndex = index % 3; // 0 for first, 1 for second, 2 for third
+            groups[groupIndex].push(img);
+        });
+
+        // Apply lightbox attributes
+        groups.forEach((group, groupIndex) => {
+            group.forEach(img => {
+                const link = document.createElement('a');
+                link.href = img.src;
+                link.setAttribute('data-lightbox', `group-${groupIndex + 1}`);
+                link.setAttribute('data-title', img.alt || `Image in Group ${groupIndex + 1}`);
+                img.parentNode.replaceChild(link, img);
+                link.appendChild(img);
+            });
+        });
+    </script>
+</body>
+</html>

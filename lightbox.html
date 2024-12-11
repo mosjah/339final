@@ -28,28 +28,30 @@
     </div>
 
     <script>
-        // Lightbox2 configuration
+        // Lightbox2 configuration to customize settings
         lightbox.option({
-            'imageFadeDuration': 1000
+            'imageFadeDuration': 1000, // Set fade duration for images
+            'resizeDuration': 700,
+            'wrapAround': true,
         });
 
-        // Group images into sets dynamically
+        // Dynamically group images into three lightbox sets
         const images = document.querySelectorAll('img');
         const groups = [[], [], []];
 
         // Distribute images into groups based on position
         images.forEach((img, index) => {
-            const groupIndex = index % 3; // 0 for first, 1 for second, 2 for third
+            const groupIndex = index % 3; // First, second, and third group
             groups[groupIndex].push(img);
         });
 
-        // Apply lightbox attributes
+        // Add Lightbox attributes to images dynamically
         groups.forEach((group, groupIndex) => {
             group.forEach(img => {
                 const link = document.createElement('a');
                 link.href = img.src;
                 link.setAttribute('data-lightbox', `group-${groupIndex + 1}`);
-                link.setAttribute('data-title', img.alt || `Image in Group ${groupIndex + 1}`);
+                link.setAttribute('data-title', img.alt); // Caption from alt text
                 img.parentNode.replaceChild(link, img);
                 link.appendChild(img);
             });
